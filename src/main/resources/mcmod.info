@@ -5,12 +5,9 @@
   "description": "Registers various things to TFC using CraftTweaker",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
   "authorList": ["Chaoziken"],
   "credits": "The TFC team for making TerraFirmaCraft",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
+  "requiredMods": ["tfc", "crafttweaker"],
+  "dependencies": ["tfc", "crafttweaker"]
 }
 ]

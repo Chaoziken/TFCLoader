@@ -2,11 +2,13 @@ package chaoziken.tfcloader.crafttweaker;
 
 import chaoziken.tfcloader.TFCLoader;
 import com.google.common.collect.ImmutableList;
+import com.teamacronymcoders.contenttweaker.modules.vanilla.resources.sounds.ISoundEventDefinition;
 import crafttweaker.annotations.ZenRegister;
 import net.dries007.tfc.objects.ArmorMaterialTFC;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenConstructor;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -64,7 +66,12 @@ public class CTArmorBuilder {
         return this;
     }
 
-    //TODO equipSound needs ContentTweaker ISoundTypeDefinition
+    @ZenMethod
+    @Optional.Method(modid = TFCLoader.MODID_CoT)
+    public CTArmorBuilder soundOnEquip(ISoundEventDefinition soundOnEquip) {
+        this.soundOnEquip = soundOnEquip.getInternal();
+        return this;
+    }
 
     @ZenMethod
     public CTArmorBuilder piercingRes(float piercingRes) {

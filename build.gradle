@@ -15,7 +15,7 @@ apply plugin: "com.wynprice.cursemaven"
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.12.2-0.0.2"
+version = "1.12.2-0.0.3"
 group = "com.chaoziken.tfcloader" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "tfcloader"
 
@@ -61,6 +61,8 @@ dependencies {
 	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.655"
     deobfCompile "curse.maven:tfc-302973:3645502"
     deobfCompile "curse.maven:ResourceLoader-226447:2477566"
+    deobfCompile "curse.maven:BASE-246996:3440963"
+    deobfCompile "curse.maven:ContentTweaker-237065:3331364"
 }
 
 processResources {
