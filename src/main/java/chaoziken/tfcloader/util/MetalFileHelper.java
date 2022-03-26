@@ -40,8 +40,8 @@ public class MetalFileHelper {
         // textures/blocks/metal/metal.png
         File metalBlock = new File(createDir(blocksDir, "metal"), metalName + ".png");
         if (!metalBlock.exists()) {
-            copyImageAndManipulate(classLoader.getResourceAsStream("assets/tfcloader/textures/blocks/metal/default.png"), metalBlock, color, 127);
-        } // ^ metal block is too difficult to edit like this. Manual editing will be better. So default to wrought_iron
+            copyImageAndManipulate(classLoader.getResourceAsStream("assets/tfcloader/textures/blocks/metal/" + baseItemTexture + ".png"), metalBlock, color, 127);
+        }
 
         // textures/items
         File itemsTextureDir = createDir(textureDir, "items");
@@ -113,8 +113,8 @@ public class MetalFileHelper {
         // textures/blocks/trapdoor/metal.png
         File metalTrapdoor = new File(createDir(blocksDir, "trapdoor"), metalName + ".png");
         if (!metalTrapdoor.exists()) {
-            copyImageAndManipulate(classLoader.getResourceAsStream("assets/tfcloader/textures/blocks/trapdoor/default.png"), metalTrapdoor, color, 127);
-        } // ^ Trapdoor is too difficult to change like this. Manual editing will be better. So default to wrought_iron texture
+            copyImageAndManipulate(classLoader.getResourceAsStream("assets/tfcloader/textures/blocks/trapdoor/" + baseItemTexture + ".png"), metalTrapdoor, color, 127);
+        }
         createMetalItemJSON(metalItemsModelDir, "trapdoor", metalName, "generated");
         writeTrapdoorBlockstateJSONFile(createDir(blockstatesDir, "trapdoor"), metalName);
 

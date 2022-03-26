@@ -15,6 +15,7 @@ import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.awt.*;
 import java.util.List;
 
 @ZenClass("mods.tfcloader.Registry")
@@ -99,7 +100,8 @@ public class CTRegistry {
         if (defaultMetals.contains(metalName)) {
             throw new IllegalArgumentException("Metal " + metalName + " already exists!");
         }
-        Metal metal = new Metal(new ResourceLocation(TFCLoader.MODID, metalName), Metal.Tier.valueOf(tier), usable, specificHeat, meltTemp, color, null, null);
+        int fluidColor = tintColorToMetal(color, baseItemTexture);
+        Metal metal = new Metal(new ResourceLocation(TFCLoader.MODID, metalName), Metal.Tier.valueOf(tier), usable, specificHeat, meltTemp, fluidColor, null, null);
         RegistryLists.metalRegistry.add(metal);
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             MetalFileHelper.generateMetalResources(CommonProxy.getTfcResourceDir(), metalName, tier, color, false, false, baseItemTexture, null, null);
@@ -130,11 +132,24 @@ public class CTRegistry {
         }
         Item.ToolMaterial toolMaterial = toolBuilder.getInner();
         IArmorMaterialTFC armorMaterial = armorBuilder.getInner();
-        Metal metal = new Metal(new ResourceLocation(TFCLoader.MODID, metalName), Metal.Tier.valueOf(tier), usable, specificHeat, meltTemp, color, toolMaterial, armorMaterial);
+        int fluidColor = tintColorToMetal(color, baseItemTexture);
+        Metal metal = new Metal(new ResourceLocation(TFCLoader.MODID, metalName), Metal.Tier.valueOf(tier), usable, specificHeat, meltTemp, fluidColor, toolMaterial, armorMaterial);
         RegistryLists.metalRegistry.add(metal);
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             MetalFileHelper.generateMetalResources(CommonProxy.getTfcResourceDir(), metalName, tier, color, true, true, baseItemTexture, toolBuilder.getToolTextures(), armorBuilder.getTextures());
         }
+    }
+
+    /**
+     * Used to tint the fluid color to the baseItemTexture's color
+     */
+    private static int tintColorToMetal(int color, String baseItemTexture) {
+        float[] colorHSB = Color.RGBtoHSB((color>>16)&0xff, (color>>8)&0xff, color&0xff, null);
+        MetalColors metalColor = MetalColors.valueOf(baseItemTexture);
+        if (metalColor.saturation != 0) {
+            colorHSB[1] = (colorHSB[1] + metalColor.saturation)/2; //Average the saturation
+        }
+        return Color.HSBtoRGB(colorHSB[0], colorHSB[1], colorHSB[2]);
     }
 
 }

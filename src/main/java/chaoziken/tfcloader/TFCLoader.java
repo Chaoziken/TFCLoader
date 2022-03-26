@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = TFCLoader.MODID, name = TFCLoader.MODNAME, version = TFCLoader.MODVERSION, dependencies = TFCLoader.MODDEPS, useMetadata = true)
+@SuppressWarnings("unused")
 public class TFCLoader {
 
     public static final String MODID = "tfcloader";
