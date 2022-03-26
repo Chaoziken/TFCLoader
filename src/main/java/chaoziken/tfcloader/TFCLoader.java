@@ -13,7 +13,7 @@ public class TFCLoader {
 
     public static final String MODID = "tfcloader";
     public static final String MODNAME = "TerraFirmaCraft Loader";
-    public static final String MODVERSION = "0.0.1";
+    public static final String MODVERSION = "0.0.2";
     public static final String MODDEPS = "required-after:forge@[14.23.5.2847,);required-after:tfc;required-after:crafttweaker@[4.1.11,)";
 
     @SidedProxy(clientSide = "chaoziken.tfcloader.proxy.ClientProxy", serverSide = "chaoziken.tfcloader.proxy.ServerProxy")
