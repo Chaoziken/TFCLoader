@@ -1,7 +1,6 @@
 package chaoziken.tfcloader.crafttweaker;
 
 import com.google.common.collect.ImmutableList;
-import crafttweaker.CraftTweakerAPI;
 
 import java.util.List;
 
@@ -18,12 +17,9 @@ public class MetalTextureTypes {
             "steel",
             "wrought_iron");
 
-    public static boolean isValidMetalTexture(String texture) {
-        if (allowedTextures.contains(texture)) {
-            return true;
-        } else {
-            CraftTweakerAPI.logError("Texture " + texture + " is not a valid texture! Defaulting to wrought_iron.");
-            return false;
+    public static void checkMetalTextureValidity(String texture) {
+        if (!allowedTextures.contains(texture)) {
+            throw new IllegalArgumentException("Texture " + texture + " is not a valid texture!");
         }
     }
 

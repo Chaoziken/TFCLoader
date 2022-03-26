@@ -94,9 +94,7 @@ public class CTRegistry {
          * White starts at 1400, ends at 1500
          * Brilliant White starts at 1500, ends at 1601
          */
-        if (!MetalTextureTypes.isValidMetalTexture(baseItemTexture)) {
-            baseItemTexture = "wrought_iron";
-        }
+        MetalTextureTypes.checkMetalTextureValidity(baseItemTexture);
         if (defaultMetals.contains(metalName)) {
             throw new IllegalArgumentException("Metal " + metalName + " already exists!");
         }
@@ -124,9 +122,7 @@ public class CTRegistry {
      */
     @ZenMethod
     public static void registerMetal(String metalName, int tier, boolean usable, float specificHeat, float meltTemp, int color, CTToolBuilder toolBuilder, CTArmorBuilder armorBuilder, @Optional(value = "wrought_iron") String baseItemTexture) {
-        if (!MetalTextureTypes.isValidMetalTexture(baseItemTexture)) {
-            baseItemTexture = "wrought_iron";
-        }
+        MetalTextureTypes.checkMetalTextureValidity(baseItemTexture);
         if (defaultMetals.contains(metalName)) {
             throw new IllegalArgumentException("Metal " + metalName + " already exists!");
         }

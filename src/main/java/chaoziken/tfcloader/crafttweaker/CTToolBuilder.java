@@ -59,10 +59,9 @@ public class CTToolBuilder {
     }
 
     @ZenMethod
-    public CTToolBuilder setToolTextures(String tool_textures) {
-        if (MetalTextureTypes.isValidMetalTexture(tool_textures)) {
-            this.toolTextures = tool_textures;
-        }
+    public CTToolBuilder setToolTextures(String toolTextures) {
+        MetalTextureTypes.checkMetalTextureValidity(toolTextures);
+        this.toolTextures = toolTextures;
         return this;
     }
 

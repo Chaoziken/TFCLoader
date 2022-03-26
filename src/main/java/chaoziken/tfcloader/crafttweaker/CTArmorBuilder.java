@@ -86,53 +86,47 @@ public class CTArmorBuilder {
 
     @ZenMethod
     public CTArmorBuilder setHelmetTexture(String helmet_texture) {
-        if (MetalTextureTypes.isValidMetalTexture(helmet_texture)) {
-            this.helmet_texture = helmet_texture;
-        }
+        MetalTextureTypes.checkMetalTextureValidity(helmet_texture);
+        this.helmet_texture = helmet_texture;
         return this;
     }
 
     @ZenMethod
     public CTArmorBuilder setChestplateTexture(String chestplate_texture) {
-        if (MetalTextureTypes.isValidMetalTexture(chestplate_texture)) {
-            this.chestplate_texture = chestplate_texture;
-        }
+        MetalTextureTypes.checkMetalTextureValidity(chestplate_texture);
+        this.chestplate_texture = chestplate_texture;
         return this;
     }
 
     @ZenMethod
     public CTArmorBuilder setGreavesTexture(String greaves_texture) {
-        if (MetalTextureTypes.isValidMetalTexture(greaves_texture)) {
-            this.greaves_texture = greaves_texture;
-        }
+        MetalTextureTypes.checkMetalTextureValidity(greaves_texture);
+        this.greaves_texture = greaves_texture;
         return this;
     }
 
     @ZenMethod
     public CTArmorBuilder setBootsTexture(String boots_texture) {
-        if (MetalTextureTypes.isValidMetalTexture(boots_texture)) {
-            this.boots_texture = boots_texture;
-        }
+        MetalTextureTypes.checkMetalTextureValidity(boots_texture);
+        this.boots_texture = boots_texture;
         return this;
     }
 
     @ZenMethod
     public CTArmorBuilder setShieldTexture(String shield_texture) {
-        if (MetalTextureTypes.isValidMetalTexture(shield_texture)) {
-            this.shield_texture = shield_texture;
-        }
+        MetalTextureTypes.checkMetalTextureValidity(shield_texture);
+        this.shield_texture = shield_texture;
         return this;
     }
 
     @ZenMethod
     public CTArmorBuilder setAllTextures(String texture) {
-        if (MetalTextureTypes.isValidMetalTexture(texture)) {
-            this.helmet_texture = texture;
-            this.chestplate_texture = texture;
-            this.greaves_texture = texture;
-            this.boots_texture = texture;
-            this.shield_texture = texture;
-        }
+        MetalTextureTypes.checkMetalTextureValidity(texture);
+        this.helmet_texture = texture;
+        this.chestplate_texture = texture;
+        this.greaves_texture = texture;
+        this.boots_texture = texture;
+        this.shield_texture = texture;
         return this;
     }
 

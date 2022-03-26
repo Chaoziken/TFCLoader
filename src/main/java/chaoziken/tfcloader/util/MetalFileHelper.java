@@ -309,7 +309,6 @@ public class MetalFileHelper {
 
             // shield
             // This does both front and back
-            // Default is based on bismuth_bronze
             createMetalShieldTexture(classLoader, metalItemsTextureDir, metalName, armorTextures.get(4), color, 127);
             writeShieldModelJSONFile(classLoader, createDir(metalItemsModelDir, "shield"), metalName, armorTextures.get(4));
         }
