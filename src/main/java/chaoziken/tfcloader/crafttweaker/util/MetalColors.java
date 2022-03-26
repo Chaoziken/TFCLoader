@@ -1,8 +1,9 @@
-package chaoziken.tfcloader.crafttweaker;
+package chaoziken.tfcloader.crafttweaker.util;
 
 /**
  * An estimate of an "average" color (in HSB/HSV) of each material. Used to tint the fluid
  */
+@SuppressWarnings("unused")
 public enum MetalColors {
 
     bismuth_bronze(131, 43, 57),

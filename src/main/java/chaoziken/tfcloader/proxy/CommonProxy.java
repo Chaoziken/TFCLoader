@@ -1,6 +1,6 @@
 package chaoziken.tfcloader.proxy;
 
-import chaoziken.tfcloader.crafttweaker.Registration;
+import chaoziken.tfcloader.crafttweaker.registration.Registration;
 import chaoziken.tfcloader.util.FileHelper;
 import crafttweaker.CraftTweakerAPI;
 import net.dries007.tfc.TerraFirmaCraft;

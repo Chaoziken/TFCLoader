@@ -1,4 +1,4 @@
-package chaoziken.tfcloader.crafttweaker;
+package chaoziken.tfcloader.crafttweaker.util;
 
 import com.google.common.collect.ImmutableList;
 

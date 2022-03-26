@@ -1,6 +1,6 @@
 package chaoziken.tfcloader.util;
 
-import chaoziken.tfcloader.crafttweaker.MetalTextureTypes;
+import chaoziken.tfcloader.crafttweaker.util.MetalTextureTypes;
 import com.google.common.collect.ImmutableList;
 
 import javax.annotation.Nullable;
@@ -851,7 +851,6 @@ public class MetalFileHelper {
         }
         try {
             FileHelper.copyInputToFileAndReplace(classLoader.getResource("assets/tfcloader/models/item/metal/shield/" + baseItemModel + ".json"), shieldJSON, "<$metalName>", metalName);
-            //Files.write(shieldJSON.toPath(), createShieldModelJSONText(metalName));
         } catch (IOException e) {
             TFCLog.logger.error("Could not generate shield model JSON file for " + metalName, e);
         }
@@ -862,7 +861,6 @@ public class MetalFileHelper {
         }
         try {
             FileHelper.copyInputToFileAndReplace(classLoader.getResource("assets/tfcloader/models/item/metal/shield/" + baseItemModel + "_blocking.json"), shieldBlockingJSON, "<$metalName>", metalName);
-            //Files.write(shieldBlockingJSON.toPath(), createShieldBlockingModelJSONText(metalName));
         } catch (IOException e) {
             TFCLog.logger.error("Could not generate shield blocking model JSON file for " + metalName, e);
         }

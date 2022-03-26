@@ -1,6 +1,7 @@
 package chaoziken.tfcloader.crafttweaker;
 
 import chaoziken.tfcloader.TFCLoader;
+import chaoziken.tfcloader.crafttweaker.util.MetalTextureTypes;
 import crafttweaker.annotations.ZenRegister;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.util.EnumHelper;
@@ -23,8 +24,13 @@ public class CTToolBuilder {
     private Item.ToolMaterial inner;
     private String toolTextures = "wrought_iron";
 
+    /**
+     * Builder for tool sets
+     * @param resourceName the name of the material this tool set is made of
+     */
     @ZenConstructor
     public CTToolBuilder(String resourceName) {
+        CTRegistry.validateName(resourceName, "ToolBuilder");
         this.resourceName = resourceName;
     }
 
@@ -65,17 +71,24 @@ public class CTToolBuilder {
         return this;
     }
 
+    /**
+     * Builds this tool set. Use this LAST
+     */
     @ZenMethod
     public CTToolBuilder build() {
         this.inner = EnumHelper.addToolMaterial(TFCLoader.MODID + "_" + resourceName, harvestLevel, maxUses, efficiency, damage, enchantability);
         return this;
     }
 
+    public String getResourceName() {
+        return this.resourceName;
+    }
+
     public Item.ToolMaterial getInner() {
-        return inner;
+        return this.inner;
     }
 
     public String getToolTextures() {
-        return toolTextures;
+        return this.toolTextures;
     }
 }

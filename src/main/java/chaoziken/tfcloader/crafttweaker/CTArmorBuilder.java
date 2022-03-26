@@ -1,6 +1,7 @@
 package chaoziken.tfcloader.crafttweaker;
 
 import chaoziken.tfcloader.TFCLoader;
+import chaoziken.tfcloader.crafttweaker.util.MetalTextureTypes;
 import com.google.common.collect.ImmutableList;
 import com.teamacronymcoders.contenttweaker.modules.vanilla.resources.sounds.ISoundEventDefinition;
 import crafttweaker.annotations.ZenRegister;
@@ -9,6 +10,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Optional;
+import org.apache.commons.lang3.Validate;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenConstructor;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -21,25 +23,30 @@ import java.util.List;
 public class CTArmorBuilder {
 
     //Default values are from Wrought Iron
-    private final String resourceName;
+    private final String metalName;
     private int durability = 33;
-    private int[] reductions = {1, 4, 5, 2};
+    private int[] reductions = {1, 4, 5, 2}; //Armor values for boots, greaves/leggings, chestplate, and helmet
     private int enchantability = 12;
     private float toughness = 0.0f;
     private SoundEvent soundOnEquip = SoundEvents.ITEM_ARMOR_EQUIP_IRON;
-    private float piercingRes = 20;
-    private float slashingRes = 20;
+    private float piercingRes = 20f;
+    private float slashingRes = 20f;
     private float crushingRes = 13.2F;
-    private String helmet_texture = "wrought_iron";
-    private String chestplate_texture = "wrought_iron";
-    private String greaves_texture = "wrought_iron";
-    private String boots_texture = "wrought_iron";
-    private String shield_texture = "wrought_iron";
+    private String helmetTexture = "wrought_iron";
+    private String chestplateTexture = "wrought_iron";
+    private String greavesTexture = "wrought_iron";
+    private String bootsTexture = "wrought_iron";
+    private String shieldTexture = "wrought_iron";
     private ArmorMaterialTFC inner;
 
+    /**
+     * Builder for armor sets. Also used to set the shield texture
+     * @param metalName the name of the metal this armor is made out of
+     */
     @ZenConstructor
-    public CTArmorBuilder(String resourceName) {
-        this.resourceName = resourceName;
+    public CTArmorBuilder(String metalName) {
+        CTRegistry.validateName(metalName, "ArmorBuilder");
+        this.metalName = metalName;
     }
 
     @ZenMethod
@@ -48,9 +55,13 @@ public class CTArmorBuilder {
         return this;
     }
 
+    /**
+     * The defense points of each piece. One point = 1/2 point on the armor bar
+     * Registers from "bottom up" despite what {@link net.minecraft.item.ItemArmor.ArmorMaterial ArmorMaterial} seems to say
+     */
     @ZenMethod
-    public CTArmorBuilder reductions(int int1, int int2, int int3, int int4) {
-        this.reductions = new int[]{int1, int2, int3, int4};
+    public CTArmorBuilder reductions(int helmet, int chestplate, int greaves, int boots) {
+        this.reductions = new int[]{boots, greaves, chestplate, helmet}; //Seems like they are registered from "bottom up"
         return this;
     }
 
@@ -69,6 +80,7 @@ public class CTArmorBuilder {
     @ZenMethod
     @Optional.Method(modid = TFCLoader.MODID_CoT)
     public CTArmorBuilder soundOnEquip(ISoundEventDefinition soundOnEquip) {
+        Validate.notNull(soundOnEquip, "SoundEventDefinition in soundOnEquip for ArmorBuilder " + metalName + " is null!");
         this.soundOnEquip = soundOnEquip.getInternal();
         return this;
     }
@@ -92,62 +104,69 @@ public class CTArmorBuilder {
     }
 
     @ZenMethod
-    public CTArmorBuilder setHelmetTexture(String helmet_texture) {
-        MetalTextureTypes.checkMetalTextureValidity(helmet_texture);
-        this.helmet_texture = helmet_texture;
+    public CTArmorBuilder setHelmetTexture(String helmetTexture) {
+        MetalTextureTypes.checkMetalTextureValidity(helmetTexture);
+        this.helmetTexture = helmetTexture;
         return this;
     }
 
     @ZenMethod
-    public CTArmorBuilder setChestplateTexture(String chestplate_texture) {
-        MetalTextureTypes.checkMetalTextureValidity(chestplate_texture);
-        this.chestplate_texture = chestplate_texture;
+    public CTArmorBuilder setChestplateTexture(String chestplateTexture) {
+        MetalTextureTypes.checkMetalTextureValidity(chestplateTexture);
+        this.chestplateTexture = chestplateTexture;
         return this;
     }
 
     @ZenMethod
-    public CTArmorBuilder setGreavesTexture(String greaves_texture) {
-        MetalTextureTypes.checkMetalTextureValidity(greaves_texture);
-        this.greaves_texture = greaves_texture;
+    public CTArmorBuilder setGreavesTexture(String greavesTexture) {
+        MetalTextureTypes.checkMetalTextureValidity(greavesTexture);
+        this.greavesTexture = greavesTexture;
         return this;
     }
 
     @ZenMethod
-    public CTArmorBuilder setBootsTexture(String boots_texture) {
-        MetalTextureTypes.checkMetalTextureValidity(boots_texture);
-        this.boots_texture = boots_texture;
+    public CTArmorBuilder setBootsTexture(String bootsTexture) {
+        MetalTextureTypes.checkMetalTextureValidity(bootsTexture);
+        this.bootsTexture = bootsTexture;
         return this;
     }
 
     @ZenMethod
-    public CTArmorBuilder setShieldTexture(String shield_texture) {
-        MetalTextureTypes.checkMetalTextureValidity(shield_texture);
-        this.shield_texture = shield_texture;
+    public CTArmorBuilder setShieldTexture(String shieldTexture) {
+        MetalTextureTypes.checkMetalTextureValidity(shieldTexture);
+        this.shieldTexture = shieldTexture;
         return this;
     }
 
     @ZenMethod
     public CTArmorBuilder setAllTextures(String texture) {
         MetalTextureTypes.checkMetalTextureValidity(texture);
-        this.helmet_texture = texture;
-        this.chestplate_texture = texture;
-        this.greaves_texture = texture;
-        this.boots_texture = texture;
-        this.shield_texture = texture;
+        this.helmetTexture = texture;
+        this.chestplateTexture = texture;
+        this.greavesTexture = texture;
+        this.bootsTexture = texture;
+        this.shieldTexture = texture;
         return this;
     }
 
+    /**
+     * Builds the armor. Use this LAST
+     */
     @ZenMethod
     public CTArmorBuilder build() {
-        this.inner = new ArmorMaterialTFC(EnumHelper.addArmorMaterial(resourceName, TFCLoader.MODID + ":" + resourceName, durability, reductions, enchantability, soundOnEquip, toughness), piercingRes, slashingRes, crushingRes);
+        this.inner = new ArmorMaterialTFC(EnumHelper.addArmorMaterial(metalName, TFCLoader.MODID + ":" + metalName, durability, reductions, enchantability, soundOnEquip, toughness), piercingRes, slashingRes, crushingRes);
         return this;
+    }
+
+    public String getMetalName() {
+        return this.metalName;
     }
 
     public ArmorMaterialTFC getInner() {
-        return inner;
+        return this.inner;
     }
 
     public List<String> getTextures() {
-        return ImmutableList.of(helmet_texture, chestplate_texture, greaves_texture, boots_texture, shield_texture);
+        return ImmutableList.of(helmetTexture, chestplateTexture, greavesTexture, bootsTexture, shieldTexture);
     }
 }

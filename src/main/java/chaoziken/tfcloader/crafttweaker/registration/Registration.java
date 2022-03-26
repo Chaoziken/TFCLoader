@@ -1,11 +1,7 @@
-package chaoziken.tfcloader.crafttweaker;
+package chaoziken.tfcloader.crafttweaker.registration;
 
-import chaoziken.tfcloader.util.TFCLog;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
+import net.dries007.tfc.api.types.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @SuppressWarnings("unused")
@@ -27,7 +23,6 @@ public class Registration {
 
     @SubscribeEvent
     public static void onPreRegisterMetal(TFCRegistryEvent.RegisterPreBlock<Metal> event) {
-        TFCLog.logger.info("Number of metal registry entries: " + RegistryLists.metalRegistry.size());
         for (Metal metal : RegistryLists.metalRegistry) {
             event.getRegistry().register(metal);
         }
@@ -37,6 +32,20 @@ public class Registration {
     public static void onPreRegisterOre(TFCRegistryEvent.RegisterPreBlock<Ore> event) {
         for (Ore ore : RegistryLists.oreRegistry) {
             event.getRegistry().register(ore);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPreRegisterTree(TFCRegistryEvent.RegisterPreBlock<Tree> event) {
+        for (Tree tree : RegistryLists.treeRegistry) {
+            event.getRegistry().register(tree);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPreRegisterPlant(TFCRegistryEvent.RegisterPreBlock<Plant> event) {
+        for (Plant plant : RegistryLists.plantRegistry) {
+            event.getRegistry().register(plant);
         }
     }
 
